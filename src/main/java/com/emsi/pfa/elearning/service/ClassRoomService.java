@@ -9,6 +9,7 @@ import com.emsi.pfa.elearning.model.Util.FormHelperClass;
 import lombok.AllArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,10 @@ public class ClassRoomService {
         form.getStudents().forEach(student-> classRoom.getUsers().add(userRepository.findByUsername(student)));
         form.getProfessors().forEach(professor-> classRoom.getProfessors().add(userRepository.findByUsername(professor)));
         classRepository.save(classRoom);
+    }
+
+    private ResponseEntity<Integer> getClassRoomsNumber(){
+        return ResponseEntity.ok().body(classRepository.findAll().size());
     }
 
 

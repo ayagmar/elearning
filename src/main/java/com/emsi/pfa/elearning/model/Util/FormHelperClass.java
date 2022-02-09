@@ -15,4 +15,10 @@ public class FormHelperClass {
         public List<String> professors=new ArrayList<>();
     }
 
+    @Data
+    public static class formCourse{
+        public String courseName;
+        public String professorName;
+    }
+
 }

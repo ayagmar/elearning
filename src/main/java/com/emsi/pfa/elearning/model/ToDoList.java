@@ -7,40 +7,21 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-
-@Data
 @Entity
 @AllArgsConstructor
+@Data
 @NoArgsConstructor
-public class Course {
+public class ToDoList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String name;
-
-    private String courseCode;
-
+    private String description;
+    private String title;
     @CreationTimestamp
     private LocalDateTime createdAt;
-
-    @OneToMany(mappedBy = "course")
-    private Collection<Post> posts;
+    private String type;
 
     @ManyToOne
-    private User professor;
-
-    @ManyToOne
-    private ClassRoom classroom;
-
-    @ManyToMany
-    private Collection<User> users=new ArrayList<>();
-
-    @OneToOne(mappedBy = "courseExam")
-    private Exam exam;
-
-
+    private User user;
 
 }

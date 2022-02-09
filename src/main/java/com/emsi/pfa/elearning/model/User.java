@@ -1,5 +1,6 @@
 package com.emsi.pfa.elearning.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -51,4 +52,11 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     private Collection<Post> ProfessorPosts=new ArrayList<>();
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "eventUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<Event> events = new ArrayList<>();
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "user")
+    private Collection<ToDoList> toDos=new ArrayList<>();
 }

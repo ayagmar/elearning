@@ -14,9 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
-import java.util.Objects;
-import java.util.UUID;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,6 +30,9 @@ public class testserv implements CommandLineRunner, UserDetailsService {
     private final CommentRepository commentRepository;
     private final ClassRepository classRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final ExamRepository examRepository;
+    private final DevoirRepository devoirRepository;
+    private final QuestionRepository questionRepository;
 
     void inituser(){
         User u=new User();
@@ -115,6 +117,36 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         roleRepository.save(U);
 
     }
+    void initDevoir(){
+        Devoir devoir = new Devoir();
+        devoir.setName("S1 devoir 1");
+        devoirRepository.save(devoir);
+       Question question = new Question();
+       question.setName("Sql select requete exist");
+       question.setReponses(Arrays.asList("Vrai" , "Faux"));
+       question.setReponsesCorrect(List.of("Vrai"));
+       question.setDevoir(devoir);
+       questionRepository.save(question);
+
+        //devoir.setQuestions(Collections.singletonList(question));
+
+
+
+
+    }
+    void initExams(){
+        Exam exam=new Exam();
+        exam.setDuration(120L);
+        exam.setName("Examin 1");
+        exam.setCourseExam(courseRepository.getById(1L));
+        exam.setStartDate(LocalDateTime.now().plusDays(10));
+        exam.setEndDate(exam.getStartDate().plusMinutes(exam.getDuration()));
+        if(exam.getEndDate().isAfter(LocalDateTime.now()) || exam.getStartDate().isBefore(LocalDateTime.now())){
+            exam.setIsActive(false);
+        }
+        examRepository.save(exam);
+
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -175,5 +207,7 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         initCourse();
         initPosts();
         initComments();
+        initExams();
+        initDevoir();
     }
 }

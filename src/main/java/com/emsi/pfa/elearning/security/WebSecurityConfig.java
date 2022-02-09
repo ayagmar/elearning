@@ -46,7 +46,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/roles/**",
             "/posts/**",
             "/classRooms/**",
-            "/"
+            "/",
+            "/api/courses/**",
+            "/exams/**",
+            "/questions/**",
+            "/devoirs/**"
     };
 
     @Autowired

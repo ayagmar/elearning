@@ -7,40 +7,27 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
 
-@Data
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Course {
+public class Exam {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-
-    private String courseCode;
-
+    private String file; //a changer plus tards
+    @OneToOne
+    private Course courseExam;
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "course")
-    private Collection<Post> posts;
+    private LocalDateTime startDate;
 
-    @ManyToOne
-    private User professor;
+    private LocalDateTime endDate;
 
-    @ManyToOne
-    private ClassRoom classroom;
+    private Long duration;
 
-    @ManyToMany
-    private Collection<User> users=new ArrayList<>();
-
-    @OneToOne(mappedBy = "courseExam")
-    private Exam exam;
-
-
-
+    private Boolean isActive=true;
 }
