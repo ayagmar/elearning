@@ -55,7 +55,7 @@ public class UserService {
     }
 
 
-    public ResponseEntity<String> getADeleteUserByID(Long id) {
+    public ResponseEntity<String> deleteUserByID(Long id) {
         userRepository.deleteById(id);
         return ResponseEntity.ok().body("User was deleted by Succes ");
     }

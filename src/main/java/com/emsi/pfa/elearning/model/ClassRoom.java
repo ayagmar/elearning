@@ -21,6 +21,6 @@ public class ClassRoom {
     @ManyToMany
     private Collection<User> professors=new ArrayList<>();
     @OneToMany(mappedBy = "classroom")
-    private Collection<Course> courses;
+    private Collection<Course> courses=new ArrayList<>();
 
 }

@@ -22,9 +22,6 @@ public class Event implements Serializable {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     @ManyToOne
-    @JoinTable(name = "users_events",
-            joinColumns = @JoinColumn(name = "event_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
     private User eventUser;
 
 }

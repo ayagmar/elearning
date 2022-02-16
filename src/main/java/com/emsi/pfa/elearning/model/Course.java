@@ -27,8 +27,10 @@ public class Course {
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "course")
-    private Collection<Post> posts;
+    private Collection<Post> posts=new ArrayList<>();
 
+    @OneToMany(mappedBy = "course")
+    private Collection<Devoir> devoirs=new ArrayList<>();
     @ManyToOne
     private User professor;
 

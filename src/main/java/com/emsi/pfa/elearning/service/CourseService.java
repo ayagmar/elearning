@@ -72,10 +72,6 @@ public class CourseService {
         return ResponseEntity.ok().body(LoggedInUser.getProfCourses());
     }
 
-    public ResponseEntity<Collection<Course>> getCoursesByClassRoomID(Long id) {
-        ClassRoom classRoom=classRepository.getById(id);
-        return ResponseEntity.ok().body(classRoom.getCourses());
-    }
 
     public ResponseEntity<Integer> getTotalCourseNumber(){
         return ResponseEntity.ok().body(courseRepository.findAll().size());

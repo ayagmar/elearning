@@ -40,7 +40,7 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "professor")
     private Collection<Course> ProfCourses=new ArrayList<>();
 
-    @OneToMany(mappedBy = "userC")
+    @OneToMany(mappedBy = "commentUser")
     private Collection<Comment> comments=new ArrayList<>();
 
     @ManyToMany(mappedBy = "users")
