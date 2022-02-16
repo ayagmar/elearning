@@ -3,6 +3,7 @@ package com.emsi.pfa.elearning.model.Util;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,5 +30,13 @@ public class FormHelperClass {
         public String professorName;
     }
 
+
+    @Data
+    public static class formExam{
+        public Long courseID;
+        public String examName;
+        public Long hours;
+        public String startDate;
+    }
 
 }

@@ -122,9 +122,9 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         devoir.setName("S1 devoir 1");
         devoirRepository.save(devoir);
        Question question = new Question();
-       question.setName("Sql select requete exist");
-       question.setReponses(Arrays.asList("Vrai" , "Faux"));
-       question.setReponsesCorrect(List.of("Vrai"));
+       question.setName("JAVA is an object oriented language");
+       question.setReponses(Arrays.asList("True" , "False"));
+       question.setReponsesCorrect(List.of(question.getReponses().get(1)));
        question.setDevoir(devoir);
        questionRepository.save(question);
 
@@ -187,13 +187,13 @@ public class testserv implements CommandLineRunner, UserDetailsService {
 
     void initComments(){
         Comment C=new Comment();
-        C.setUserC(userRepository.findByUsername("Etudiant1"));
+        C.setCommentUser(userRepository.findByUsername("Etudiant1"));
         C.setText("Thanks for the valuable information");
         C.setPost(postRepository.getById(1L));
         commentRepository.save(C);
 
         Comment C2=new Comment();
-        C2.setUserC(userRepository.findByUsername("Etudiant2"));
+        C2.setCommentUser(userRepository.findByUsername("Etudiant2"));
         C2.setText("I have a problem and would like to discuss more details in private if it's possible,thank you");
         C2.setPost(postRepository.getById(1L));
         commentRepository.save(C2);

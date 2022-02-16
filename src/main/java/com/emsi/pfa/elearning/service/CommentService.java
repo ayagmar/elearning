@@ -41,7 +41,7 @@ public class CommentService {
         Comment comment=new Comment();
         comment.setPost(post);
         comment.setText(mycomment);
-        comment.setUserC(LoggedInUser);
+        comment.setCommentUser(LoggedInUser);
         commentRepository.save(comment);
         return "Added your Comment into post sucessfully";
     }

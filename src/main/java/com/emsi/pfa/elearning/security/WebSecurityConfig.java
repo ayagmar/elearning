@@ -55,7 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/events/**",
             "/api/users/**",
             "/api/classrooms/**",
-            "/documents/**"
+            "/documents/**",
+            "/api/exams/**"
     };
 
     @Autowired
