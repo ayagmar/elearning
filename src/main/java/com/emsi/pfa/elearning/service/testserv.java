@@ -103,6 +103,7 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         classroom.setCategory(5);
         classroom.setBranch("Informatique");
         classroom.getProfessors().add(userRepository.findByUsername("Professor"));
+        classroom.getProfessors().add(userRepository.findByUsername("Professor2"));
         classroom.getUsers().add(userRepository.findByUsername("Etudiant1"));
         classroom.getUsers().add(userRepository.findByUsername("Etudiant2"));
         classRepository.save(classroom);
@@ -111,7 +112,7 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         classroom2.setName("4IFA1");
         classroom2.setCategory(4);
         classroom2.setBranch("Finance");
-        classroom2.getProfessors().add(userRepository.findByUsername("Professor1"));
+        classroom2.getProfessors().add(userRepository.findByUsername("Professor2"));
         classroom2.getUsers().add(userRepository.findByUsername("Etudiant3"));
         classRepository.save(classroom2);
     }
@@ -229,6 +230,14 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         R2.setProfessor(userRepository.findByUsername("Professor2"));
         R2.setCourseCode(UUID.randomUUID().toString().replaceAll("-", "").trim().substring(0, 6));
         courseRepository.save(R2);
+
+        Course R3 = new Course();
+        R3.setName("Finance et Audit");
+        R3.setClassroom(classRepository.findByName("4IFA1"));
+        R3.setProfessor(userRepository.findByUsername("Professor2"));
+        R3.setCourseCode(UUID.randomUUID().toString().replaceAll("-", "").trim().substring(0, 6));
+        courseRepository.save(R3);
+
 
     }
 
