@@ -44,6 +44,7 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         u.setPassword(bCryptPasswordEncoder.encode("password"));
         u.setLastName("Alami");
         u.getRoles().add(roleRepository.findByName("STUDENT"));
+        u.setInitials();
         userRepository.save(u);
 
         User u4=new User();
@@ -53,6 +54,7 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         u4.setPassword(bCryptPasswordEncoder.encode("password"));
         u4.setLastName("Terari");
         u4.getRoles().add(roleRepository.findByName("STUDENT"));
+        u4.setInitials();
         userRepository.save(u4);
 
         User u5=new User();
@@ -62,6 +64,7 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         u5.setPassword(bCryptPasswordEncoder.encode("password"));
         u5.setLastName("Moundir");
         u5.getRoles().add(roleRepository.findByName("STUDENT"));
+        u5.setInitials();
         userRepository.save(u5);
 
         User u2=new User();
@@ -71,6 +74,7 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         u2.setPassword(bCryptPasswordEncoder.encode("password"));
         u2.setLastName("test");
         u2.getRoles().add(roleRepository.findByName("PROFESSOR"));
+        u2.setInitials();
         userRepository.save(u2);
 
         User u7=new User();
@@ -80,6 +84,7 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         u7.setPassword(bCryptPasswordEncoder.encode("password"));
         u7.setLastName("Alaoui");
         u7.getRoles().add(roleRepository.findByName("PROFESSOR"));
+        u7.setInitials();
         userRepository.save(u7);
 
         User u3=new User();
@@ -89,6 +94,7 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         u3.setPassword(bCryptPasswordEncoder.encode("password"));
         u3.setLastName("junior");
         u3.getRoles().add(roleRepository.findByName("ADMIN"));
+        u3.setInitials();
         userRepository.save(u3);
     }
 

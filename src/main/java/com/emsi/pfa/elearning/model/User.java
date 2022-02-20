@@ -4,11 +4,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Locale;
 
 @Entity
 @Data
@@ -30,7 +33,16 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String password;
     private Boolean enabled=true;
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
+    private String initials;
+
+
+
+    public void setInitials() {
+        this.initials = this.firstName.toUpperCase(Locale.ROOT).substring(0,1)+this.lastName.toUpperCase(Locale.ROOT).substring(0,1);
+    }
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Collection<Role> roles = new ArrayList<>();
@@ -64,4 +76,6 @@ public class User implements Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "user")
     private Collection<ToDoList> toDos=new ArrayList<>();
+
+
 }
