@@ -1,7 +1,6 @@
 package com.emsi.pfa.elearning.web;
 
 import com.emsi.pfa.elearning.model.Course;
-import com.emsi.pfa.elearning.model.Util.FormHelperClass;
 import com.emsi.pfa.elearning.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +16,12 @@ public class CourseController {
     private CourseService courseService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<Course>> getAllCourses(){
+    public ResponseEntity<List<Course>> getAllCourses() {
         return courseService.getAll();
     }
 
     @GetMapping("count/{name}")
-    public ResponseEntity<Object> getCourseNumberByClassName(@PathVariable String name){
+    public ResponseEntity<Object> getCourseNumberByClassName(@PathVariable String name) {
         return courseService.getCourseNumberByClassRoomID(name);
     }
 }

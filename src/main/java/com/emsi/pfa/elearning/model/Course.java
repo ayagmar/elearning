@@ -29,11 +29,11 @@ public class Course {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "course")
-    private Collection<Post> posts=new ArrayList<>();
+    private Collection<Post> posts = new ArrayList<>();
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "course")
-    private Collection<Devoir> devoirs=new ArrayList<>();
+    private Collection<Devoir> devoirs = new ArrayList<>();
 
 
     @ManyToOne
@@ -43,12 +43,11 @@ public class Course {
     @ManyToOne
     private ClassRoom classroom;
     @ManyToMany
-    private Collection<User> users=new ArrayList<>();
+    private Collection<User> users = new ArrayList<>();
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToOne(mappedBy = "courseExam")
     private Exam exam;
-
 
 
 }

@@ -6,7 +6,6 @@ import com.emsi.pfa.elearning.dao.PostRepository;
 import com.emsi.pfa.elearning.dao.UserRepository;
 import com.emsi.pfa.elearning.model.*;
 import com.emsi.pfa.elearning.model.Util.FormHelperClass;
-import io.swagger.models.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -20,12 +19,13 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import static java.nio.file.Files.copy;
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+
+import static java.nio.file.Files.copy;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 @Service
 @Transactional
@@ -46,13 +46,13 @@ public class PostService {
     public String CreatePost(FormHelperClass.postForm form, List<MultipartFile> multipartFile) throws IOException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User LoggedInUser = userRepository.findByUsername(auth.getPrincipal().toString());
-        Course course=courseRepository.getById(form.getCourseID());
-        Collection<Course> courses=LoggedInUser.getProfCourses();
-        if(!courses.contains(course)){
+        Course course = courseRepository.getById(form.getCourseID());
+        Collection<Course> courses = LoggedInUser.getProfCourses();
+        if (!courses.contains(course)) {
             return "cannot post this course is not created by you !";
         }
 
-        Post newPost=new Post();
+        Post newPost = new Post();
         Notification postNotification = new Notification();
         newPost.setCourse(course);
         newPost.setDescription(form.getDescription());
@@ -62,14 +62,13 @@ public class PostService {
         postRepository.save(newPost);
         for (MultipartFile file : multipartFile) {
             String filename = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
-             File folder = new File(DIRECTORY +"/"+ "Course "+course.getName()+" posts for user "+LoggedInUser.getUsername());
-             if(folder.mkdir()){
-            System.out.println("dossier created");
-              }
-             else{
-                 System.out.println("error creating folder");
-              }
-             Path path = Paths.get(String.valueOf(folder), filename).toAbsolutePath().normalize();
+            File folder = new File(DIRECTORY + "/" + "Course " + course.getName() + " posts for user " + LoggedInUser.getUsername());
+            if (folder.mkdir()) {
+                System.out.println("dossier created");
+            } else {
+                System.out.println("error creating folder");
+            }
+            Path path = Paths.get(String.valueOf(folder), filename).toAbsolutePath().normalize();
             Document document = new Document();
             document.setPost(newPost);
             document.setTypeDocument(file.getContentType());
@@ -83,12 +82,12 @@ public class PostService {
         return "Post created!";
     }
 
-    public ResponseEntity<List<Post>> getAllPosts(){
+    public ResponseEntity<List<Post>> getAllPosts() {
         return ResponseEntity.ok().body(postRepository.findAll());
     }
 
 
-    public ResponseEntity<List<Post>> getPostsByCourseId(Long id){
+    public ResponseEntity<List<Post>> getPostsByCourseId(Long id) {
         return ResponseEntity.ok().body(postRepository.findPostsByCourseId(id));
     }
 }

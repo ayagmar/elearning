@@ -11,6 +11,8 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 public interface ToDoListRepository extends JpaRepository<ToDoList, Long> {
     List<ToDoList> findByType(String type);
+
     List<ToDoList> findByUserIdAndType(Long id, String type);
+
     List<ToDoList> findByUserId(Long id);
 }

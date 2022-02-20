@@ -1,8 +1,6 @@
 package com.emsi.pfa.elearning.web;
 
 import com.emsi.pfa.elearning.service.DocumentService;
-import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;

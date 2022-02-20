@@ -11,5 +11,6 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:4200")
 public interface ClassRepository extends JpaRepository<ClassRoom, Long> {
     ClassRoom findByName(String name);
+
     Optional<ClassRoom> findClassRoomByName(String name);
 }

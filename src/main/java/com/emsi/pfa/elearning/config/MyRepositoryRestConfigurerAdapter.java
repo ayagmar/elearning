@@ -10,7 +10,6 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 import javax.persistence.EntityManager;
 import javax.persistence.metamodel.Type;
-import java.util.stream.Collectors;
 
 @Configuration
 public class MyRepositoryRestConfigurerAdapter {

@@ -32,50 +32,41 @@ public class User implements Serializable {
     private String email;
     @Column(nullable = false)
     private String password;
-    private Boolean enabled=true;
+    private Boolean enabled = true;
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     private String initials;
-
-
-
-    public void setInitials() {
-        this.initials = this.firstName.toUpperCase(Locale.ROOT).substring(0,1)+this.lastName.toUpperCase(Locale.ROOT).substring(0,1);
-    }
-
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Collection<Role> roles = new ArrayList<>();
-
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(mappedBy = "users")
     private Collection<Course> courses = new ArrayList<>();
-
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "professor")
-    private Collection<Course> ProfCourses=new ArrayList<>();
-
+    private Collection<Course> ProfCourses = new ArrayList<>();
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "commentUser")
-    private Collection<Comment> comments=new ArrayList<>();
-
+    private Collection<Comment> comments = new ArrayList<>();
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(mappedBy = "users")
-    private Collection<ClassRoom> userClassrooms=new ArrayList<>();
+    private Collection<ClassRoom> userClassrooms = new ArrayList<>();
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(mappedBy = "professors")
-    private Collection<ClassRoom> professorClassrooms=new ArrayList<>();
+    private Collection<ClassRoom> professorClassrooms = new ArrayList<>();
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "user")
-    private Collection<Post> ProfessorPosts=new ArrayList<>();
-
+    private Collection<Post> ProfessorPosts = new ArrayList<>();
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "eventUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<Event> events = new ArrayList<>();
-
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "user")
-    private Collection<ToDoList> toDos=new ArrayList<>();
+    private Collection<ToDoList> toDos = new ArrayList<>();
+
+    public void setInitials() {
+        this.initials = this.firstName.toUpperCase(Locale.ROOT).substring(0, 1) + this.lastName.toUpperCase(Locale.ROOT).substring(0, 1);
+    }
 
 
 }

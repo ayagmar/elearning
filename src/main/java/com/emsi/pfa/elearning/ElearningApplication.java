@@ -1,5 +1,7 @@
 package com.emsi.pfa.elearning;
 
+import org.modelmapper.ModelMapper;
+import org.modelmapper.config.Configuration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.audit.InMemoryAuditEventRepository;
 import org.springframework.boot.actuate.trace.http.HttpTraceRepository;
@@ -7,12 +9,9 @@ import org.springframework.boot.actuate.trace.http.InMemoryHttpTraceRepository;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.config.Configuration;
 
 @SpringBootApplication
 public class ElearningApplication {
-
 
 
     public static void main(String[] args) {
@@ -39,10 +38,9 @@ public class ElearningApplication {
     }
 
     @Bean
-    public InMemoryAuditEventRepository repository(){
+    public InMemoryAuditEventRepository repository() {
         return new InMemoryAuditEventRepository();
     }
-
 
 
 }

@@ -16,32 +16,32 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<User>> getAllUsers(){
+    public ResponseEntity<List<User>> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("/count")
-    public ResponseEntity<Integer> getAllUsersCount(){
+    public ResponseEntity<Integer> getAllUsersCount() {
         return userService.getAllUsersCount();
     }
 
     @GetMapping("/role/{id}/count")
-    public ResponseEntity<Integer> getAllUsersCountByRoleID(@PathVariable Long id){
+    public ResponseEntity<Integer> getAllUsersCountByRoleID(@PathVariable Long id) {
         return userService.getAllUsersCountByRoleId(id);
     }
 
     @GetMapping("/role/{id}")
-    public ResponseEntity<List<User>> getAllUsersByRoleID(@PathVariable Long id){
+    public ResponseEntity<List<User>> getAllUsersByRoleID(@PathVariable Long id) {
         return userService.getAllUsersByRoleId(id);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUserById(@PathVariable Long id){
+    public ResponseEntity<String> deleteUserById(@PathVariable Long id) {
         return userService.deleteUserByID(id);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<String> updateUser(@PathVariable Long id,@RequestBody User user){
+    public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody User user) {
         return userService.updateUser(id, user);
     }
 

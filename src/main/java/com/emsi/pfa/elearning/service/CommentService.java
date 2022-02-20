@@ -31,16 +31,16 @@ public class CommentService {
     @Autowired
     private ClassRepository classRepository;
 
-    public String postComment(Long postId,String mycomment){
+    public String postComment(Long postId, String mycomment) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User LoggedInUser = userRepository.findByUsername(auth.getPrincipal().toString());
-        Post post=postRepository.getById(postId);
-        Course course=post.getCourse();
-        Collection<Course> courses=LoggedInUser.getCourses();
-        if(!courses.contains(course)){
+        Post post = postRepository.getById(postId);
+        Course course = post.getCourse();
+        Collection<Course> courses = LoggedInUser.getCourses();
+        if (!courses.contains(course)) {
             return "you cannot comment in a post for a course you are not enrolled in";
         }
-        Comment comment=new Comment();
+        Comment comment = new Comment();
         comment.setPost(post);
         comment.setText(mycomment);
         comment.setCommentUser(LoggedInUser);
@@ -48,12 +48,12 @@ public class CommentService {
         return "Added your Comment into post sucessfully";
     }
 
-    public String deleteComment(Long commentID){
+    public String deleteComment(Long commentID) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User LoggedInUser = userRepository.findByUsername(auth.getPrincipal().toString());
-        Comment comment=commentRepository.getById(commentID);
-        Collection<Comment> comments=LoggedInUser.getComments();
-        if(!comments.contains(comment)){
+        Comment comment = commentRepository.getById(commentID);
+        Collection<Comment> comments = LoggedInUser.getComments();
+        if (!comments.contains(comment)) {
             return "Cannot delete comment";
         }
         commentRepository.delete(comment);
@@ -61,11 +61,11 @@ public class CommentService {
         return "Comment deleted successfully";
     }
 
-    public ResponseEntity<List<Comment>> getAllComments(){
+    public ResponseEntity<List<Comment>> getAllComments() {
         return ResponseEntity.ok().body(commentRepository.findAll());
     }
 
-    public ResponseEntity<List<Comment>> getAllCommentsByPostID(Long id){
+    public ResponseEntity<List<Comment>> getAllCommentsByPostID(Long id) {
         return ResponseEntity.ok().body(commentRepository.findCommentsByPost_PostId(id));
     }
 

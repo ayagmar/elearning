@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -17,11 +18,11 @@ public class ClassRoom {
     private Long id;
     private String name;
     @ManyToMany
-    private Collection<User> users=new ArrayList<>();
+    private Collection<User> users = new ArrayList<>();
     @ManyToMany
-    private Collection<User> professors=new ArrayList<>();
+    private Collection<User> professors = new ArrayList<>();
 
     @OneToMany(mappedBy = "classroom")
-    private Collection<Course> courses=new ArrayList<>();
+    private Collection<Course> courses = new ArrayList<>();
 
 }

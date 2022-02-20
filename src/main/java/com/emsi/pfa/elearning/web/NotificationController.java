@@ -17,12 +17,12 @@ public class NotificationController {
     private NotificationService notificationService;
 
     @GetMapping("/all")
-    public List<Notification> getAll(){
+    public List<Notification> getAll() {
         return notificationService.getAllNotifications();
     }
 
     @PutMapping("/{id}/read")
-    public void setRead(@PathVariable Long id){
+    public void setRead(@PathVariable Long id) {
         notificationService.setRead(id);
     }
 }

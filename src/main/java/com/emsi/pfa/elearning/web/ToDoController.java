@@ -36,20 +36,19 @@ public class ToDoController {
 
     @ApiOperation(value = "Used by Logged in client to change his to do list type ")
     @PutMapping("/{id}/{type}")
-    public ResponseEntity<String> setTodoType(@PathVariable Long id,@PathVariable String type) {
-        return toDoService.setType(id,type);
+    public ResponseEntity<String> setTodoType(@PathVariable Long id, @PathVariable String type) {
+        return toDoService.setType(id, type);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> CreateTodo(@RequestBody ToDoList toDoDTO){
+    public ResponseEntity<String> CreateTodo(@RequestBody ToDoList toDoDTO) {
         return toDoService.createTodo(toDoDTO);
     }
 
     @PutMapping("/{id}/edit")
-    public ResponseEntity<String> updateTodo(@RequestBody ToDoList toDoDTO, @PathVariable Long id){
-        return toDoService.updateTodo(id,toDoDTO);
+    public ResponseEntity<String> updateTodo(@RequestBody ToDoList toDoDTO, @PathVariable Long id) {
+        return toDoService.updateTodo(id, toDoDTO);
     }
-
 
 
 }

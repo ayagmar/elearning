@@ -43,22 +43,22 @@ public class ExamService {
     private DocumentRepository documentRepository;
 
     @Autowired
-    private  UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private CourseRepository courseRepository;
 
 
-    public ResponseEntity<String> addExam(FormHelperClass.formExam form , List<MultipartFile> multipartFile) throws IOException {
+    public ResponseEntity<String> addExam(FormHelperClass.formExam form, List<MultipartFile> multipartFile) throws IOException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User LoggedInUser = userRepository.findByUsername(auth.getPrincipal().toString());
-        Course course=courseRepository.getById(form.getCourseID());
-        Collection<Course> courses=LoggedInUser.getProfCourses();
-        if(!courses.contains(course)){
+        Course course = courseRepository.getById(form.getCourseID());
+        Collection<Course> courses = LoggedInUser.getProfCourses();
+        if (!courses.contains(course)) {
             return ResponseEntity.badRequest().body("cannot post this course is not created by you !");
         }
 
-        Exam exam=new Exam();
+        Exam exam = new Exam();
         exam.setCourseExam(course);
         exam.setName(form.getExamName());
         exam.setStartDate(LocalDateTime.parse(form.getStartDate()));
@@ -67,11 +67,10 @@ public class ExamService {
         examRepository.save(exam);
         for (MultipartFile file : multipartFile) {
             String filename = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
-            File folder = new File(DIRECTORY +"/"+" "+ exam.getName()+" for course "+exam.getCourseExam().getName());
-            if(folder.mkdir()){
+            File folder = new File(DIRECTORY + "/" + " " + exam.getName() + " for course " + exam.getCourseExam().getName());
+            if (folder.mkdir()) {
                 System.out.println("dossier created");
-            }
-            else{
+            } else {
                 System.out.println("error creating folder");
             }
             Path path = Paths.get(String.valueOf(folder), filename).toAbsolutePath().normalize();
@@ -87,11 +86,11 @@ public class ExamService {
         return ResponseEntity.ok().body("Exam has been created!");
     }
 
-    public ResponseEntity<List<Exam>> getAllExams(){
+    public ResponseEntity<List<Exam>> getAllExams() {
         return ResponseEntity.ok().body(examRepository.findAll());
     }
 
-    public ResponseEntity<Exam> getExamsByCourseID(Long id){
+    public ResponseEntity<Exam> getExamsByCourseID(Long id) {
         return ResponseEntity.ok().body(examRepository.findExamByCourseExamId(id));
     }
 }

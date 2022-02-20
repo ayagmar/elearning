@@ -2,7 +2,6 @@ package com.emsi.pfa.elearning.service;
 
 import com.emsi.pfa.elearning.dao.*;
 import com.emsi.pfa.elearning.model.*;
-import com.emsi.pfa.elearning.model.ClassRoom;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.core.GrantedAuthority;
@@ -36,8 +35,8 @@ public class testserv implements CommandLineRunner, UserDetailsService {
     private final ToDoListRepository toDoRepository;
     private final EventRepository eventRepository;
 
-    void inituser(){
-        User u=new User();
+    void inituser() {
+        User u = new User();
         u.setEmail("Etudiant1Email@gmail.com");
         u.setUsername("Etudiant1");
         u.setFirstName("Mohamed");
@@ -47,7 +46,7 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         u.setInitials();
         userRepository.save(u);
 
-        User u4=new User();
+        User u4 = new User();
         u4.setEmail("Etudiant2Email@gmail.com");
         u4.setUsername("Etudiant2");
         u4.setFirstName("Ayoub");
@@ -57,7 +56,7 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         u4.setInitials();
         userRepository.save(u4);
 
-        User u5=new User();
+        User u5 = new User();
         u5.setEmail("Etudiant3Email@gmail.com");
         u5.setUsername("Etudiant3");
         u5.setFirstName("Raiss");
@@ -67,7 +66,7 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         u5.setInitials();
         userRepository.save(u5);
 
-        User u2=new User();
+        User u2 = new User();
         u2.setEmail("Prof1Email@gmail.com");
         u2.setUsername("Professor");
         u2.setFirstName("professor");
@@ -77,7 +76,7 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         u2.setInitials();
         userRepository.save(u2);
 
-        User u7=new User();
+        User u7 = new User();
         u7.setEmail("Prof2Email@gmail.com");
         u7.setUsername("Professor2");
         u7.setFirstName("Mohamed");
@@ -87,7 +86,7 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         u7.setInitials();
         userRepository.save(u7);
 
-        User u3=new User();
+        User u3 = new User();
         u3.setEmail("Admin1Email@gmail.com");
         u3.setUsername("admin");
         u3.setFirstName("admin");
@@ -98,15 +97,15 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         userRepository.save(u3);
     }
 
-    void initClassroom(){
-        ClassRoom classroom=new ClassRoom();
+    void initClassroom() {
+        ClassRoom classroom = new ClassRoom();
         classroom.setName("5IIR1");
         classroom.getProfessors().add(userRepository.findByUsername("Professor"));
         classroom.getUsers().add(userRepository.findByUsername("Etudiant1"));
         classroom.getUsers().add(userRepository.findByUsername("Etudiant2"));
         classRepository.save(classroom);
 
-        ClassRoom classroom2=new ClassRoom();
+        ClassRoom classroom2 = new ClassRoom();
         classroom2.setName("5IIR2");
         classroom2.getProfessors().add(userRepository.findByUsername("Professor1"));
         classroom2.getUsers().add(userRepository.findByUsername("Etudiant3"));
@@ -114,27 +113,26 @@ public class testserv implements CommandLineRunner, UserDetailsService {
     }
 
 
-
-    public void initToDo(){
-        ToDoList t=new ToDoList();
+    public void initToDo() {
+        ToDoList t = new ToDoList();
         t.setDescription("To do list for user ");
         t.setType("Done");
         t.setUser(userRepository.findByUsername("admin"));
         t.setTitle("Done");
 
-        ToDoList t4=new ToDoList();
+        ToDoList t4 = new ToDoList();
         t4.setDescription("Test To do");
         t4.setType("Normal");
         t4.setUser(userRepository.findByUsername("admin"));
         t4.setTitle("Normal");
 
-        ToDoList t2=new ToDoList();
+        ToDoList t2 = new ToDoList();
         t2.setDescription("Test To do");
         t2.setType("Trash");
         t2.setUser(userRepository.findByUsername("admin"));
         t2.setTitle("Trash");
 
-        ToDoList t3=new ToDoList();
+        ToDoList t3 = new ToDoList();
         t3.setDescription("Test ihahahTo do");
         t3.setType("Important");
         t3.setUser(userRepository.findByUsername("admin"));
@@ -147,7 +145,7 @@ public class testserv implements CommandLineRunner, UserDetailsService {
 
     }
 
-    public void initEvent(){
+    public void initEvent() {
 
         Event b = new Event();
         b.setDescription("Event for testing purposes");
@@ -158,7 +156,8 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         eventRepository.save(b);
 
     }
-    void initRole(){
+
+    void initRole() {
         Role R = new Role();
         Role U = new Role();
         Role R3 = new Role();
@@ -170,31 +169,31 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         roleRepository.save(U);
 
     }
-    void initDevoir(){
+
+    void initDevoir() {
         Devoir devoir = new Devoir();
         devoir.setName("S1 devoir 1");
         devoirRepository.save(devoir);
-       Question question = new Question();
-       question.setName("JAVA is an object oriented language");
-       question.setReponses(Arrays.asList("True" , "False"));
-       question.setReponsesCorrect(List.of(question.getReponses().get(1)));
-       question.setDevoir(devoir);
-       questionRepository.save(question);
+        Question question = new Question();
+        question.setName("JAVA is an object oriented language");
+        question.setReponses(Arrays.asList("True", "False"));
+        question.setReponsesCorrect(List.of(question.getReponses().get(1)));
+        question.setDevoir(devoir);
+        questionRepository.save(question);
 
         //devoir.setQuestions(Collections.singletonList(question));
 
 
-
-
     }
-    void initExams(){
-        Exam exam=new Exam();
+
+    void initExams() {
+        Exam exam = new Exam();
         exam.setDuration(120L);
         exam.setName("Examin 1");
         exam.setCourseExam(courseRepository.getById(1L));
         exam.setStartDate(LocalDateTime.now().plusDays(10));
         exam.setEndDate(exam.getStartDate().plusMinutes(exam.getDuration()));
-        if(exam.getEndDate().isAfter(LocalDateTime.now()) || exam.getStartDate().isBefore(LocalDateTime.now())){
+        if (exam.getEndDate().isAfter(LocalDateTime.now()) || exam.getStartDate().isBefore(LocalDateTime.now())) {
             exam.setIsActive(false);
         }
         examRepository.save(exam);
@@ -208,29 +207,29 @@ public class testserv implements CommandLineRunner, UserDetailsService {
             throw new UsernameNotFoundException("Username not found in database !");
         }
         Collection<GrantedAuthority> authorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),user.getEnabled(),true,true,true,authorities);
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.getEnabled(), true, true, true, authorities);
     }
 
-    void initCourse(){
+    void initCourse() {
         Course R = new Course();
         R.setName("JAVA OOP 2");
         R.setClassroom(classRepository.findByName("5IIR1"));
         R.setProfessor(userRepository.findByUsername("Professor"));
         R.getUsers().add(userRepository.findByUsername("Etudiant1"));
-        R.setCourseCode(UUID.randomUUID().toString().replaceAll("-", "").trim().substring(0,6));
+        R.setCourseCode(UUID.randomUUID().toString().replaceAll("-", "").trim().substring(0, 6));
         courseRepository.save(R);
 
         Course R2 = new Course();
         R2.setName("Data Mining");
         R2.setClassroom(classRepository.findByName("5IIR1"));
         R2.setProfessor(userRepository.findByUsername("Professor2"));
-        R2.setCourseCode(UUID.randomUUID().toString().replaceAll("-", "").trim().substring(0,6));
+        R2.setCourseCode(UUID.randomUUID().toString().replaceAll("-", "").trim().substring(0, 6));
         courseRepository.save(R2);
 
     }
 
-    void initPosts(){
-        Post R=new Post();
+    void initPosts() {
+        Post R = new Post();
         R.setCourse(courseRepository.getById(1L));
         R.setTitle("Java introduction");
         R.setDescription("Java is an object oriented programming language");
@@ -238,14 +237,14 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         postRepository.save(R);
     }
 
-    void initComments(){
-        Comment C=new Comment();
+    void initComments() {
+        Comment C = new Comment();
         C.setCommentUser(userRepository.findByUsername("Etudiant1"));
         C.setText("Thanks for the valuable information");
         C.setPost(postRepository.getById(1L));
         commentRepository.save(C);
 
-        Comment C2=new Comment();
+        Comment C2 = new Comment();
         C2.setCommentUser(userRepository.findByUsername("Etudiant2"));
         C2.setText("I have a problem and would like to discuss more details in private if it's possible,thank you");
         C2.setPost(postRepository.getById(1L));

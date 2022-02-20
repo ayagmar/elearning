@@ -5,12 +5,9 @@ import com.emsi.pfa.elearning.dao.CommentRepository;
 import com.emsi.pfa.elearning.dao.CourseRepository;
 import com.emsi.pfa.elearning.dao.PostRepository;
 import com.emsi.pfa.elearning.dao.UserRepository;
-import com.emsi.pfa.elearning.model.*;
-import lombok.AllArgsConstructor;
+import com.emsi.pfa.elearning.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,16 +22,16 @@ import java.util.Optional;
 
 public class UserService {
     @Autowired
-    private  UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
-    private  CourseRepository courseRepository;
+    private CourseRepository courseRepository;
     @Autowired
-    private  CommentRepository commentRepository;
+    private CommentRepository commentRepository;
     @Autowired
-    private  PostRepository postRepository;
+    private PostRepository postRepository;
 
 
     public ResponseEntity<List<User>> getAllUsers() {
@@ -62,8 +59,8 @@ public class UserService {
 
     public ResponseEntity<String> updateUser(Long id, User user) {
 
-        Optional<User>  userDB_1 = userRepository.findById(id);
-        if (userDB_1.isEmpty()){
+        Optional<User> userDB_1 = userRepository.findById(id);
+        if (userDB_1.isEmpty()) {
             return ResponseEntity.badRequest().body("Not Found ");
         }
         User userDB = userDB_1.get();

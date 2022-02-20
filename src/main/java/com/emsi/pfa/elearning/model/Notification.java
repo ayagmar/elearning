@@ -5,7 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -20,6 +23,6 @@ public class Notification implements Serializable {
     private String description;
     @CreationTimestamp
     private LocalDateTime createdAt;
-    private Boolean read=false;
+    private Boolean read = false;
     private String time;
 }

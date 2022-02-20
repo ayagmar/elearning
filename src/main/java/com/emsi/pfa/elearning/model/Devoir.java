@@ -19,7 +19,7 @@ public class Devoir {
     private Long id;
     private String name;
     @OneToMany(mappedBy = "devoir")
-    private Collection<Question> questions= new ArrayList<>();
+    private Collection<Question> questions = new ArrayList<>();
     @ManyToOne
     private Course course;
 

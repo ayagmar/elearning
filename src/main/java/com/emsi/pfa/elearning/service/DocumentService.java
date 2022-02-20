@@ -4,31 +4,22 @@ import com.emsi.pfa.elearning.dao.DocumentRepository;
 import com.emsi.pfa.elearning.dao.PostRepository;
 import com.emsi.pfa.elearning.model.Document;
 import com.emsi.pfa.elearning.model.Post;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-
-import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -41,11 +32,11 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 @Service
 @Transactional
 public class DocumentService {
+    public static final String DIRECTORY = System.getProperty("user.home") + "/Downloads";
     @Autowired
     private DocumentRepository documentRepository;
     @Autowired
     private PostRepository postRepository;
-    public static final String DIRECTORY = System.getProperty("user.home") + "/Downloads";
 
     public ResponseEntity<String> uploadFilesToPost(Long id, List<MultipartFile> multipartFile) throws IOException {
         Post post = postRepository.getById(id);
@@ -62,7 +53,7 @@ public class DocumentService {
             documentRepository.save(document);
 
         }
-        return ResponseEntity.ok().body("Uploaded " + multipartFile.size()+ " files successfully.");
+        return ResponseEntity.ok().body("Uploaded " + multipartFile.size() + " files successfully.");
     }
 
     public ResponseEntity<String> downloadFileFromDB(Long id, HttpServletResponse response) throws Exception {
