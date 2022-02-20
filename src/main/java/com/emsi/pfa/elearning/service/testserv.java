@@ -100,13 +100,17 @@ public class testserv implements CommandLineRunner, UserDetailsService {
     void initClassroom() {
         ClassRoom classroom = new ClassRoom();
         classroom.setName("5IIR1");
+        classroom.setCategory(5);
+        classroom.setBranch("Informatique");
         classroom.getProfessors().add(userRepository.findByUsername("Professor"));
         classroom.getUsers().add(userRepository.findByUsername("Etudiant1"));
         classroom.getUsers().add(userRepository.findByUsername("Etudiant2"));
         classRepository.save(classroom);
 
         ClassRoom classroom2 = new ClassRoom();
-        classroom2.setName("5IIR2");
+        classroom2.setName("4IFA1");
+        classroom2.setCategory(4);
+        classroom2.setBranch("Finance");
         classroom2.getProfessors().add(userRepository.findByUsername("Professor1"));
         classroom2.getUsers().add(userRepository.findByUsername("Etudiant3"));
         classRepository.save(classroom2);

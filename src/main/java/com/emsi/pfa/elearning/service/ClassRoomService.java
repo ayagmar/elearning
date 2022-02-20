@@ -45,6 +45,14 @@ public class ClassRoomService {
         return ResponseEntity.ok().body(classRepository.findAll().size());
     }
 
+    public ResponseEntity<List<ClassRoom>> getClassRoomsByCategory(Integer cat) {
+        return ResponseEntity.ok().body(classRepository.findClassRoomsByCategory(cat));
+    }
+
+    public ResponseEntity<List<ClassRoom>> getClassRoomsByBranch(String branch) {
+        return ResponseEntity.ok().body(classRepository.findClassRoomsByBranch(branch));
+    }
+
     public void DeleteClassroom(Long id) {
         classRepository.deleteById(id);
     }

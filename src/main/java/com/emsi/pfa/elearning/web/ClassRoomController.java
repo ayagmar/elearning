@@ -24,8 +24,18 @@ public class ClassRoomController {
 
 
     @GetMapping("/all")
-    public ResponseEntity<List<ClassRoom>> getAllCourses() {
+    public ResponseEntity<List<ClassRoom>> getAllClassRooms() {
         return classRoomService.getAll();
+    }
+
+    @GetMapping("/byBranch/{branch}/all")
+    public ResponseEntity<List<ClassRoom>> getAllClassRoomsByBranch(@PathVariable String branch) {
+        return classRoomService.getClassRoomsByBranch(branch);
+    }
+
+    @GetMapping("/byCategory/{category}/all")
+    public ResponseEntity<List<ClassRoom>> getAllClassRoomsByCategory(@PathVariable Integer category) {
+        return classRoomService.getClassRoomsByCategory(category);
     }
 
     @ApiOperation(value = "Create a classroom")
@@ -68,6 +78,7 @@ public class ClassRoomController {
     public void DeleteProfessorFromClassRoom(@PathVariable Long idClass, @PathVariable Long idProf) {
         classRoomService.DeleteProf(idClass, idProf);
     }
+
 
 
 }

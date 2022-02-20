@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -17,6 +18,8 @@ public class ClassRoom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private Integer category;
+    private String branch;
     @ManyToMany
     private Collection<User> users = new ArrayList<>();
     @ManyToMany
