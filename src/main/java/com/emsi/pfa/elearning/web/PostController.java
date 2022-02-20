@@ -1,5 +1,7 @@
 package com.emsi.pfa.elearning.web;
 
+import com.emsi.pfa.elearning.model.Exam;
+import com.emsi.pfa.elearning.model.Post;
 import com.emsi.pfa.elearning.model.Util.FormHelperClass;
 import com.emsi.pfa.elearning.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,4 +23,14 @@ public class PostController {
     public String saveDossier(@RequestPart FormHelperClass.postForm form, @RequestPart("document") List<MultipartFile> multipartFile) throws IOException {
         return postService.CreatePost(form,multipartFile);
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Post>> getAllPosts() {
+        return postService.getAllPosts();
+    }
+    @GetMapping("/course/{id}")
+    public ResponseEntity<List<Post>> getPostByCourseID(@PathVariable Long id) {
+        return postService.getPostsByCourseId(id);
+    }
+
 }

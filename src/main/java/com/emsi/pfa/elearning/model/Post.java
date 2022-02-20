@@ -1,5 +1,6 @@
 package com.emsi.pfa.elearning.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,6 +28,7 @@ public class Post {
     private LocalDateTime createdAt;
     @ManyToOne
     private Course course;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "post")
     private Collection<Comment> comments=new ArrayList<>();
     @OneToMany(mappedBy = "post")

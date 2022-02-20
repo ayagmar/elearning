@@ -1,5 +1,6 @@
 package com.emsi.pfa.elearning.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,20 +27,25 @@ public class Course {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "course")
     private Collection<Post> posts=new ArrayList<>();
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "course")
     private Collection<Devoir> devoirs=new ArrayList<>();
+
+
     @ManyToOne
     private User professor;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     private ClassRoom classroom;
-
     @ManyToMany
     private Collection<User> users=new ArrayList<>();
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToOne(mappedBy = "courseExam")
     private Exam exam;
 

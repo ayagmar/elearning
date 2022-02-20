@@ -1,5 +1,6 @@
 package com.emsi.pfa.elearning.web;
 
+import com.emsi.pfa.elearning.model.ClassRoom;
 import com.emsi.pfa.elearning.model.Course;
 import com.emsi.pfa.elearning.model.Util.FormHelperClass;
 import com.emsi.pfa.elearning.service.ClassRoomService;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -19,6 +21,13 @@ public class ClassRoomController {
 
     @Autowired
     private ClassRoomService classRoomService;
+
+
+
+    @GetMapping("/all")
+    public ResponseEntity<List<ClassRoom>> getAllCourses(){
+        return classRoomService.getAll();
+    }
 
     @ApiOperation(value = "Create a classroom")
     @PostMapping("/create")

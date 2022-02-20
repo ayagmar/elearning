@@ -20,6 +20,7 @@ public class ClassRoom {
     private Collection<User> users=new ArrayList<>();
     @ManyToMany
     private Collection<User> professors=new ArrayList<>();
+
     @OneToMany(mappedBy = "classroom")
     private Collection<Course> courses=new ArrayList<>();
 

@@ -31,24 +31,29 @@ public class User implements Serializable {
     private String password;
     private Boolean enabled=true;
 
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Collection<Role> roles = new ArrayList<>();
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(mappedBy = "users")
     private Collection<Course> courses = new ArrayList<>();
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "professor")
     private Collection<Course> ProfCourses=new ArrayList<>();
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "commentUser")
     private Collection<Comment> comments=new ArrayList<>();
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(mappedBy = "users")
     private Collection<ClassRoom> userClassrooms=new ArrayList<>();
-
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(mappedBy = "professors")
     private Collection<ClassRoom> professorClassrooms=new ArrayList<>();
-
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "user")
     private Collection<Post> ProfessorPosts=new ArrayList<>();
 

@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -35,6 +36,9 @@ public class CourseService {
     private  CourseRepository courseRepository;
 
 
+    public ResponseEntity<List<Course>> getAll(){
+        return ResponseEntity.ok().body(courseRepository.findAll());
+    }
 
     public ResponseEntity<String> CreateCourse(FormHelperClass.formCourse fCourse){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

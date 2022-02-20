@@ -6,12 +6,14 @@ import com.emsi.pfa.elearning.model.Course;
 import com.emsi.pfa.elearning.model.Post;
 import com.emsi.pfa.elearning.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @Transactional
@@ -58,4 +60,14 @@ public class CommentService {
         commentRepository.flush();
         return "Comment deleted successfully";
     }
+
+    public ResponseEntity<List<Comment>> getAllComments(){
+        return ResponseEntity.ok().body(commentRepository.findAll());
+    }
+
+    public ResponseEntity<List<Comment>> getAllCommentsByPostID(Long id){
+        return ResponseEntity.ok().body(commentRepository.findCommentsByPost_PostId(id));
+    }
+
+
 }

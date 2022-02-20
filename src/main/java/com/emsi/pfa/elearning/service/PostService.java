@@ -6,7 +6,9 @@ import com.emsi.pfa.elearning.dao.PostRepository;
 import com.emsi.pfa.elearning.dao.UserRepository;
 import com.emsi.pfa.elearning.model.*;
 import com.emsi.pfa.elearning.model.Util.FormHelperClass;
+import io.swagger.models.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -79,5 +81,14 @@ public class PostService {
         }
 
         return "Post created!";
+    }
+
+    public ResponseEntity<List<Post>> getAllPosts(){
+        return ResponseEntity.ok().body(postRepository.findAll());
+    }
+
+
+    public ResponseEntity<List<Post>> getPostsByCourseId(Long id){
+        return ResponseEntity.ok().body(postRepository.findPostsByCourseId(id));
     }
 }

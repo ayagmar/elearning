@@ -86,4 +86,12 @@ public class ExamService {
 
         return ResponseEntity.ok().body("Exam has been created!");
     }
+
+    public ResponseEntity<List<Exam>> getAllExams(){
+        return ResponseEntity.ok().body(examRepository.findAll());
+    }
+
+    public ResponseEntity<Exam> getExamsByCourseID(Long id){
+        return ResponseEntity.ok().body(examRepository.findExamByCourseExamId(id));
+    }
 }

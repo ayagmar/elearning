@@ -22,8 +22,8 @@ public class ToDoService {
     private final ToDoListRepository toDoRepository;
     public static List<String> types = Arrays.asList("Important", "Done", "Trash","Normal");
 
-    public List<ToDoList> getAllTodos() {
-        return toDoRepository.findAll();
+    public ResponseEntity<List<ToDoList>> getAllTodos() {
+        return  ResponseEntity.ok().body(toDoRepository.findAll());
     }
 
 

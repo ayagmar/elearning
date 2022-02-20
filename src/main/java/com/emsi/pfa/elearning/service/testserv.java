@@ -33,6 +33,8 @@ public class testserv implements CommandLineRunner, UserDetailsService {
     private final ExamRepository examRepository;
     private final DevoirRepository devoirRepository;
     private final QuestionRepository questionRepository;
+    private final ToDoListRepository toDoRepository;
+    private final EventRepository eventRepository;
 
     void inituser(){
         User u=new User();
@@ -105,6 +107,51 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         classRepository.save(classroom2);
     }
 
+
+
+    public void initToDo(){
+        ToDoList t=new ToDoList();
+        t.setDescription("To do list for user ");
+        t.setType("Done");
+        t.setUser(userRepository.findByUsername("admin"));
+        t.setTitle("Done");
+
+        ToDoList t4=new ToDoList();
+        t4.setDescription("Test To do");
+        t4.setType("Normal");
+        t4.setUser(userRepository.findByUsername("admin"));
+        t4.setTitle("Normal");
+
+        ToDoList t2=new ToDoList();
+        t2.setDescription("Test To do");
+        t2.setType("Trash");
+        t2.setUser(userRepository.findByUsername("admin"));
+        t2.setTitle("Trash");
+
+        ToDoList t3=new ToDoList();
+        t3.setDescription("Test ihahahTo do");
+        t3.setType("Important");
+        t3.setUser(userRepository.findByUsername("admin"));
+        t3.setTitle("Important");
+
+        toDoRepository.save(t);
+        toDoRepository.save(t2);
+        toDoRepository.save(t3);
+        toDoRepository.save(t4);
+
+    }
+
+    public void initEvent(){
+
+        Event b = new Event();
+        b.setDescription("Event for testing purposes");
+        b.setTitle("Event1");
+        b.setEventUser(userRepository.findByUsername("admin"));
+        b.setStartDate(LocalDateTime.now());
+        b.setEndDate(LocalDateTime.now().plusDays(2));
+        eventRepository.save(b);
+
+    }
     void initRole(){
         Role R = new Role();
         Role U = new Role();
@@ -209,5 +256,7 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         initComments();
         initExams();
         initDevoir();
+        initToDo();
+        initEvent();
     }
 }
