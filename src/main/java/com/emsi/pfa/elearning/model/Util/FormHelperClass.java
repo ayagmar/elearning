@@ -10,6 +10,8 @@ public class FormHelperClass {
     @Data
     public static class formClass {
         public String name;
+        private Integer category;
+        private String branch;
         public List<String> students = new ArrayList<>();
         public List<String> professors = new ArrayList<>();
     }

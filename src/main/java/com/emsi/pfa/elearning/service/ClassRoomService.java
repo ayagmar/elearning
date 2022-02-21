@@ -36,6 +36,8 @@ public class ClassRoomService {
     public void CreateClassroom(FormHelperClass.formClass form) {
         ClassRoom classRoom = new ClassRoom();
         classRoom.setName(form.getName());
+        classRoom.setBranch(form.getBranch());
+        classRoom.setCategory(form.getCategory());
         form.getStudents().forEach(student -> classRoom.getUsers().add(userRepository.findByUsername(student)));
         form.getProfessors().forEach(professor -> classRoom.getProfessors().add(userRepository.findByUsername(professor)));
         classRepository.save(classRoom);
