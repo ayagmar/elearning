@@ -2,6 +2,7 @@ package com.emsi.pfa.elearning.service;
 
 
 import com.emsi.pfa.elearning.dao.*;
+import com.emsi.pfa.elearning.model.Notification;
 import com.emsi.pfa.elearning.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,9 @@ public class UserService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private NotificationRepository notificationRepository;
+
 
     public ResponseEntity<List<User>> getAllUsers() {
 
@@ -63,6 +67,9 @@ public class UserService {
         user.setRoles(Collections.singletonList(roleRepository.getById(roleid)));
         user.setInitials();
         userRepository.save(user);
+        Notification notification=new Notification();
+        notification.setDescription("new user has been created");
+        notificationRepository.save(notification);
     }
 
     public ResponseEntity<String> updateUser(Long id, User user) {

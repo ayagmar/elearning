@@ -48,7 +48,7 @@ public class UserController {
 
 
     @ApiOperation(value = "Used by Admin to create another admin, a new professor or a new student (1=ADMIN) (2=Professor) (3=STUDENT) ")
-    @PostMapping("/user/create/role/{id}")
+    @PostMapping("/create/role/{id}")
     public void CreateUser(@RequestBody User user, @PathVariable Long id){
         userService.CreateUser(user,id);
     }

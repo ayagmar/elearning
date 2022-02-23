@@ -39,14 +39,17 @@ public class CourseService {
     }
 
     public ResponseEntity<String> CreateCourse(FormHelperClass.formCourse fCourse) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User LoggedInUser = userRepository.findByUsername(auth.getPrincipal().toString());
+
         Course course = new Course();
         course.setName(fCourse.getCourseName());
         course.setProfessor(userRepository.findByUsername(fCourse.getProfessorName()));
+        course.setClassroom(classRepository.getById(fCourse.getClassroomID()));
+        classRepository.getById(fCourse.getClassroomID()).getUsers().forEach(student->{
+            course.getUsers().add(student);
+        });
         course.setCourseCode(UUID.randomUUID().toString().replaceAll("-", "").trim().substring(0, 6));
         courseRepository.save(course);
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/test").toUriString());
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/courses/create").toUriString());
         return ResponseEntity.created(uri).body("Course created sucessfully");
     }
 

@@ -28,6 +28,7 @@ public class FormHelperClass {
     public static class formCourse {
         public String courseName;
         public String professorName;
+        public Long classroomID;
     }
 
 
