@@ -202,6 +202,14 @@ public class testserv implements CommandLineRunner, UserDetailsService {
             exam.setIsActive(false);
         }
         examRepository.save(exam);
+        Event event=new Event();
+        event.setEventUser(userRepository.findByUsername("admin"));
+        event.setStartDate(exam.getStartDate());
+        event.setEndDate(exam.getEndDate());
+        event.setTitle(exam.getName());
+        event.setDescription(exam.getName()+" pour cours "+exam.getCourseExam().getName());
+        eventRepository.save(event);
+
 
     }
 

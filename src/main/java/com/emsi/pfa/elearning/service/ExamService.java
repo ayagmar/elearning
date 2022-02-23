@@ -1,13 +1,7 @@
 package com.emsi.pfa.elearning.service;
 
-import com.emsi.pfa.elearning.dao.CourseRepository;
-import com.emsi.pfa.elearning.dao.DocumentRepository;
-import com.emsi.pfa.elearning.dao.ExamRepository;
-import com.emsi.pfa.elearning.dao.UserRepository;
-import com.emsi.pfa.elearning.model.Course;
-import com.emsi.pfa.elearning.model.Document;
-import com.emsi.pfa.elearning.model.Exam;
-import com.emsi.pfa.elearning.model.User;
+import com.emsi.pfa.elearning.dao.*;
+import com.emsi.pfa.elearning.model.*;
 import com.emsi.pfa.elearning.model.Util.FormHelperClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -48,6 +42,9 @@ public class ExamService {
     @Autowired
     private CourseRepository courseRepository;
 
+    @Autowired
+    private EventRepository eventRepository;
+
 
     public ResponseEntity<String> addExam(FormHelperClass.formExam form, List<MultipartFile> multipartFile) throws IOException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -65,6 +62,14 @@ public class ExamService {
         exam.setDuration(form.getHours());
         exam.setEndDate(LocalDateTime.parse(form.getStartDate()).plusHours(form.getHours()));
         examRepository.save(exam);
+        Event event=new Event();
+        event.setEventUser(LoggedInUser);
+        event.setStartDate(exam.getStartDate());
+        event.setEndDate(exam.getEndDate());
+        event.setTitle(exam.getName());
+        event.setDescription(exam.getName()+" pour cours "+exam.getCourseExam().getName());
+        eventRepository.save(event);
+
         for (MultipartFile file : multipartFile) {
             String filename = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
             File folder = new File(DIRECTORY + "/" + " " + exam.getName() + " for course " + exam.getCourseExam().getName());
@@ -82,6 +87,8 @@ public class ExamService {
             copy(file.getInputStream(), path, REPLACE_EXISTING);
             documentRepository.save(document);
         }
+
+
 
         return ResponseEntity.ok().body("Exam has been created!");
     }

@@ -18,6 +18,16 @@ public class FormHelperClass {
 
 
     @Data
+    public static class UserEventForm {
+        private String dateStart;
+        private String dateEnd;
+        private String description;
+        private String title;
+        private String username;
+    }
+
+
+    @Data
     public static class postForm {
         public Long courseID;
         public String postTitle;

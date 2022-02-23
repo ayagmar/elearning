@@ -1,15 +1,13 @@
 package com.emsi.pfa.elearning.web;
 
 import com.emsi.pfa.elearning.model.Event;
+import com.emsi.pfa.elearning.model.Util.FormHelperClass;
 import com.emsi.pfa.elearning.service.EventService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +24,11 @@ public class EventController {
     @GetMapping("/all")
     public ResponseEntity<List<Event>> getAll() {
         return eventService.getAll();
+    }
+
+    @ApiOperation(value = "Used by admin to create a new event for a specific user")
+    @PostMapping("/create")
+    public ResponseEntity<String> CreateEvent(@RequestBody FormHelperClass.UserEventForm form){
+        return eventService.CreateEvent(form);
     }
 }
