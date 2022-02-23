@@ -1,10 +1,7 @@
 package com.emsi.pfa.elearning.service;
 
 
-import com.emsi.pfa.elearning.dao.CommentRepository;
-import com.emsi.pfa.elearning.dao.CourseRepository;
-import com.emsi.pfa.elearning.dao.PostRepository;
-import com.emsi.pfa.elearning.dao.UserRepository;
+import com.emsi.pfa.elearning.dao.*;
 import com.emsi.pfa.elearning.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -32,6 +30,9 @@ public class UserService {
     private CommentRepository commentRepository;
     @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
 
     public ResponseEntity<List<User>> getAllUsers() {
@@ -55,6 +56,13 @@ public class UserService {
     public ResponseEntity<String> deleteUserByID(Long id) {
         userRepository.deleteById(id);
         return ResponseEntity.ok().body("User was deleted by Succes ");
+    }
+
+    public void CreateUser(User user,Long roleid){
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setRoles(Collections.singletonList(roleRepository.getById(roleid)));
+        user.setInitials();
+        userRepository.save(user);
     }
 
     public ResponseEntity<String> updateUser(Long id, User user) {

@@ -33,6 +33,7 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String password;
     private Boolean enabled = true;
+    private String telephone;
     @CreationTimestamp
     private LocalDateTime createdAt;
 

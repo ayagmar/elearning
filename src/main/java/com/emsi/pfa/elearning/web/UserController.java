@@ -2,6 +2,7 @@ package com.emsi.pfa.elearning.web;
 
 import com.emsi.pfa.elearning.model.User;
 import com.emsi.pfa.elearning.service.UserService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,5 +45,13 @@ public class UserController {
     public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody User user) {
         return userService.updateUser(id, user);
     }
+
+
+    @ApiOperation(value = "Used by Admin to create another admin, a new professor or a new student (1=ADMIN) (2=Professor) (3=STUDENT) ")
+    @PostMapping("/user/create/role/{id}")
+    public void CreateUser(@RequestBody User user, @PathVariable Long id){
+        userService.CreateUser(user,id);
+    }
+
 
 }
