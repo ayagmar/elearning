@@ -254,17 +254,26 @@ public class testserv implements CommandLineRunner, UserDetailsService {
         R.setCourse(courseRepository.getById(1L));
         R.setTitle("Java introduction");
         R.setDescription("Java is an object oriented programming language");
-        R.setUser(userRepository.findByUsername("Professor"));
+        R.setUser(R.getCourse().getProfessor());
         postRepository.save(R);
+        Post R2 = new Post();
+        R2.setCourse(courseRepository.getById(1L));
+        R2.setTitle("Your first Java application");
+        R2.setDescription(" class A { \n" +
+                " public static void main(String args[]){ \n" +
+                "     System.out.println(\"Hello World\"); \n" +
+                " } \n" +
+                "}");
+        R2.setUser(R2.getCourse().getProfessor());
+        postRepository.save(R2);
     }
 
     void initComments() {
         Comment C = new Comment();
+        C.setPost(postRepository.getById(1L));
         C.setCommentUser(userRepository.findByUsername("Etudiant1"));
         C.setText("Thanks for the valuable information");
-        C.setPost(postRepository.getById(1L));
         commentRepository.save(C);
-
         Comment C2 = new Comment();
         C2.setCommentUser(userRepository.findByUsername("Etudiant2"));
         C2.setText("I have a problem and would like to discuss more details in private if it's possible,thank you");
